@@ -32,7 +32,7 @@ public class BancoController extends Thread{
 			this.valor = (double) ((Math.random()  * 901) + 99);
 			semaforo.acquire();
 			if(valor > saldo) {
-				System.err.println("Saldo insuficiente para o saque de " + df.format(valor) + " solicitado da conta " + cod);
+				System.err.println("Saldo insuficiente para o saque de R$" + df.format(valor) + " solicitado da conta " + cod);
 			} else {
 				this.saldo -= this.valor;
 				System.out.println("A conta " + cod + " está fazendo saque de R$" + df.format(valor) + ". Valor restante em conta: R$" + df.format(saldo));
