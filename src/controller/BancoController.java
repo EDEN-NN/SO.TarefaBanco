@@ -15,21 +15,21 @@ public class BancoController extends Thread{
 		this.semaforo = semaforo;
 	}
 	
-	private void saldo() {
+	private void saldoSaque() {
 		this.saldo = (double) ((Math.random()  * 901) + 99);
-		this.valor = (double) ((Math.random()  * 801) + 99);
-
 	} 
+	
 	
 	@Override
 	public void run() {
-		saldo();
+		saldoSaque();
+		sacar();
 		depositar();
-		sacar();	
 	}
 	
 	private void sacar() {
 		try {
+			this.valor = (double) ((Math.random()  * 801) + 99);
 			semaforo.acquire();
 			if(valor > saldo) {
 				System.err.println("Saldo insuficiente para o saque de " + df.format(valor) + "solicitado da conta " + cod);
@@ -45,6 +45,7 @@ public class BancoController extends Thread{
 	
 	private void depositar() {
 		try {
+			this.valor = (double) ((Math.random()  * 801) + 99);
 			semaforo.acquire();
 			this.saldo += this.valor;
 			System.out.println("A conta " + cod + " Está fazendo um deposito de R$" + df.format(valor) + ". Saldo em conta: R$" + df.format(saldo));
